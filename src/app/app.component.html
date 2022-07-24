@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div *ngFor="let user of users" class="m-3">
+  <div *ngFor="let user of users" class="m-3 d-flex flex-column">
 
     <span class="p-2 border">{{'id: ' +  user['id'] }}</span>
     <span class="p-2 border">{{'First Name: ' +  user['firstName'] }}</span>
@@ -51,7 +51,7 @@
       <span class="p-2 border">{{'email verified: '}}<input type="radio" formControlName="emailVerified"></span>
       <span class="p-2 border">{{'Date of birth: ' }}<input type="date" formControlName="dateOfBirth"></span>
       <span class="p-2 border">{{'Create Date: '}}<input type="date" formControlName="createDate"></span>
-      <div>
+      <div class="d-flex">
         <button class="mx-1 btn btn-success" (click)="onEditSaveClick(user['id'])">Save</button>
         <button class="mx-1 btn btn-danger"(click)="editMode = false">Cancel</button>
       </div>
@@ -67,7 +67,7 @@
     <span class="p-2 border">{{'email verified: '}}<input type="radio" formControlName="emailVerified"></span>
     <span class="p-2 border">{{'Date of birth: ' }}<input type="date" formControlName="dateOfBirth"></span>
     <span class="p-2 border">{{'Create Date: '}}<input type="date" formControlName="createDate"></span>
-    <div>
+    <div class="d-flex">
       <button class="mx-1 btn btn-success" (click)="onCreateSaveClick()">Save</button>
       <button class="mx-1 btn btn-danger"(click)="createMode = false">Cancel</button>
     </div>
