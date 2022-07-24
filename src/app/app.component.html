@@ -1,0 +1,78 @@
+<div *ngIf="users?.length" class="my-5">
+
+  <div *ngIf="isDeleted">
+    <div>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <div>User Deleted!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="isDeleted = false">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEdited">
+    <div>
+      <div class="alert alert-primary alert-dismissible" role="alert">
+        <div>User Edited!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="isEdited = false">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isCreated">
+    <div>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <div>User Created!</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="isCreated = false">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let user of users" class="m-3">
+
+    <span class="p-2 border">{{'id: ' +  user['id'] }}</span>
+    <span class="p-2 border">{{'First Name: ' +  user['firstName'] }}</span>
+    <span class="p-2 border">{{'Last Name: ' +  user['lastName'] }}</span>
+    <span class="p-2 border">{{'email: ' +  user['email'] }}</span>
+    <span class="p-2 border">{{'email verified: ' +  user['emailVerified'] }}</span>
+    <span class="p-2 border">{{'Date of birth: ' +  user['dateOfBirth'] }}</span>
+    <span class="p-2 border">{{'Create Date: ' +  user['createDate'] }}</span>
+
+    <button class="mx-1 btn btn-primary" (click)="editMode = true; editForm.patchValue(user)">Edit</button>
+    <button class="mx-1 btn btn-danger" (click)="onDeleteUser(user['id'])">Delete</button>
+
+    <form *ngIf="editMode" class="d-flex flex-column w-25" [formGroup]="editForm">
+      <span class="p-2 border">{{'id: '}}<input type="number" formControlName="id"></span>
+      <span class="p-2 border">{{'First Name: ' }}<input formControlName="firstName"></span>
+      <span class="p-2 border">{{'Last Name: ' }}<input formControlName="lastName"></span>
+      <span class="p-2 border">{{'email: '}}<input type="email" formControlName="email"></span>
+      <span class="p-2 border">{{'email verified: '}}<input type="radio" formControlName="emailVerified"></span>
+      <span class="p-2 border">{{'Date of birth: ' }}<input type="date" formControlName="dateOfBirth"></span>
+      <span class="p-2 border">{{'Create Date: '}}<input type="date" formControlName="createDate"></span>
+      <div>
+        <button class="mx-1 btn btn-success" (click)="onEditSaveClick(user['id'])">Save</button>
+        <button class="mx-1 btn btn-danger"(click)="editMode = false">Cancel</button>
+      </div>
+    </form>
+
+  </div>
+
+  <form *ngIf="createMode" class="d-flex flex-column w-25" [formGroup]="editForm">
+    <span class="p-2 border">{{'id: '}}<input type="number" formControlName="id"></span>
+    <span class="p-2 border">{{'First Name: ' }}<input formControlName="firstName"></span>
+    <span class="p-2 border">{{'Last Name: ' }}<input formControlName="lastName"></span>
+    <span class="p-2 border">{{'email: '}}<input type="email" formControlName="email"></span>
+    <span class="p-2 border">{{'email verified: '}}<input type="radio" formControlName="emailVerified"></span>
+    <span class="p-2 border">{{'Date of birth: ' }}<input type="date" formControlName="dateOfBirth"></span>
+    <span class="p-2 border">{{'Create Date: '}}<input type="date" formControlName="createDate"></span>
+    <div>
+      <button class="mx-1 btn btn-success" (click)="onCreateSaveClick()">Save</button>
+      <button class="mx-1 btn btn-danger"(click)="createMode = false">Cancel</button>
+    </div>
+  </form>
+
+  <button class="m-3 btn btn-success" (click)="createMode = true">+ Add new User</button>
+</div>
+
